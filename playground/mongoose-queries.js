@@ -10,18 +10,18 @@ var id = '5aa8c22be9b876df105cdecd11';
 //   console.log('Id not valid');
 // }
 
-/*
-Todo.find({
-  _id: id
-}).then((todos) => {
-  console.log('Todos', todos);
-});
 
-Todo.findOne({
-  _id: id
-}).then((todo) => {
-  console.log('Todo', todo);
-});*/
+// Todo.find({
+//   _id: id
+// }).then((todos) => {
+//   console.log('Todos', todos);
+// });
+//
+// Todo.findOne({
+//   _id: id
+// }).then((todo) => {
+//   console.log('Todo', todo);
+// });
 
 Todo.findById({
   _id: id
