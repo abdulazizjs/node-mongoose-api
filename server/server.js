@@ -1,3 +1,5 @@
+require('./config/config');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
@@ -10,7 +12,7 @@ const {User} = require('./models/user');
 
 var app = express();
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 
 app.use(bodyParser.json());
 app.post('/todos', (req, res) => {
@@ -78,7 +80,7 @@ app.patch('/todos/:id', (req, res) => {
   } else {
     body.completed = false;
     body.completedAt = null;
-    
+
   }
 
    Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
