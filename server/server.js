@@ -8,6 +8,7 @@ const _ = require('lodash');
 const {mongoose} = require('./db/mongoose-todo');
 const {Todo} = require('./models/todo');
 const {User} = require('./models/user');
+var {authenticate} = require('./middleware/authenticate');
 
 
 var app = express();
@@ -97,8 +98,8 @@ app.patch('/todos/:id', (req, res) => {
 app.post('/users', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
   var user = new User(body);
-
-
+  console.log(body);
+  console.log(body.email);
 
   user.save().then(() => {
 
@@ -108,8 +109,15 @@ app.post('/users', (req, res) => {
     res.header('x-auth', token).send(user);
   }).catch((e) => {
     res.status(400).send(e);
-  })
-})
+  });
+});
+
+
+app.get('/users/me',authenticate, (req, res) => {
+  var token = req.header('x-auth');
+
+res.send(req.user);
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
